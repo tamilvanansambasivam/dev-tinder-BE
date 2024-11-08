@@ -14,12 +14,12 @@ app.post("/users", (req, res) => {
   res.send("users successfully posted");
 });
 
-app.delete("/users", (req, res) => {
-  res.send("users successfully deleted");
-});
-
 app.patch("/users", (req, res) => {
   res.send("user updated successfully");
+});
+
+app.delete("/users", (req, res) => {
+  res.send("users successfully deleted");
 });
 
 // Start the server
