@@ -1,5 +1,4 @@
 const express = require("express");
-const test = require("./middleware/index");
 const User = require("./models/user");
 
 const app = express();
