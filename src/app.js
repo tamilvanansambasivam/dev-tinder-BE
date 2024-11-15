@@ -6,11 +6,6 @@ const app = express();
 const connectDB = require("./config/database");
 const PORT = 3000;
 
-app.use(test);
-app.get("/", (req, res) => {
-  res.send("middleware is successfully tested");
-});
-
 app.post("/sign-up", (req, res) => {
   const user = new User({
     firstName: "tamil",
