@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("./models/user");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 
 const app = express();
 const connectDB = require("./config/database");
@@ -71,9 +72,9 @@ app.get("/user", async (req, res) => {
   }
 });
 
-app.get("/all-users", (req, res) => {
+app.get("/all-users", async (req, res) => {
   try {
-    const users = User.find({});
+    const users = await User.find({});
     res.send(users);
   } catch (err) {
     console.log("something went wrong while getting all users");
