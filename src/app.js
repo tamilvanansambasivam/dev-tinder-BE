@@ -2,62 +2,14 @@ const express = require("express");
 const User = require("./models/user");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
-
+const signup = require("./routes/signup");
 const app = express();
 const connectDB = require("./config/database");
 const PORT = 3000;
 
 app.use(express.json());
 
-app.post("/sign-up", async (req, res) => {
-  try {
-    const { firstName, lastName, email, password } = req.body;
-
-    // Validate input fields
-
-    if (!firstName || !lastName || !email || !password) {
-      return res.status(400).send("All fields are required");
-    }
-    // Use validator.js to validate the email and password
-    if (!validator.isEmail(email)) {
-      return res.status(400).send("Invalid email address");
-    }
-
-    if (
-      !validator.isStrongPassword(password, {
-        minLength: 8,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-      })
-    ) {
-      return res
-        .status(400)
-        .send(
-          "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a symbol"
-        );
-    }
-
-    const user = new User({
-      firstName,
-      lastName,
-      email,
-      password, // Note: Ensure to hash passwords before saving in production!
-    });
-    await user.save();
-    res.status(201).send("User is created");
-  } catch (err) {
-    if (err.code === 11000) {
-      // MongoDB Duplicate Key Error
-      return res
-        .status(400)
-        .send("Email already in use. Please try a different one.");
-    }
-    console.error(err); // Log the error for debugging
-    res.status(500).send("Error occurred during sign-up");
-  }
-});
+app.post("/sign-up", signup);
 // get specific users by email
 // get all APIs from db
 
