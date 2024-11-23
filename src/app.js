@@ -3,6 +3,7 @@ const User = require("./models/user");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const signup = require("./routes/signup");
+const login = require("./routes/login");
 const app = express();
 const connectDB = require("./config/database");
 const PORT = 3000;
@@ -10,6 +11,8 @@ const PORT = 3000;
 app.use(express.json());
 
 app.post("/sign-up", signup);
+
+app.get("/login", login);
 // get specific users by email
 // get all APIs from db
 
