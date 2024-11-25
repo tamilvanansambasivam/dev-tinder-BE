@@ -9,6 +9,7 @@ const connectDB = require("./config/database");
 const PORT = 3000;
 
 app.use(express.json());
+// app.use(cookieParser());
 
 app.post("/sign-up", signup);
 
@@ -20,6 +21,7 @@ app.get("/user", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     console.log(req.body);
+    console.log(req.cookies);
     res.send(user);
   } catch (err) {
     console.log("Something went wrong while getting user ");

@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 async function connectDB() {
-  return mongoose
-    .connect(
-      "mongodb+srv://demo:wwD2xc1nxQcIfcds@cluster0.xhzxtxe.mongodb.net/devTinder"
-    )
-    .then(() => {
-      console.log("mongodb is connected");
-    });
+  return mongoose.connect(process.env.MONGO_URI).then(() => {
+    console.log("mongodb is connected");
+  });
 }
 
 module.exports = connectDB;
