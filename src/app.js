@@ -13,11 +13,9 @@ const PORT = 3000;
 app.use(express.json());
 app.use(cookieParser());
 app.get("/test", function (req, res) {
-  // Cookies that have not been signed
   res.cookie("token", "tamilcreatedcookie");
   console.log("Cookies: ", req.cookies);
 
-  // Cookies that have been signed
   res.send("cookie reading");
 });
 
