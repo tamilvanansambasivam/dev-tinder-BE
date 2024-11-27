@@ -13,6 +13,7 @@ const app = express();
 const connectDB = require("./config/database");
 const getAllUsers = require("./routes/getAllUsers");
 const getUser = require("./routes/getUser");
+const { userAuth } = require("./middleware/auth");
 const PORT = 3000;
 
 app.use(express.json());
@@ -25,7 +26,7 @@ app.get("/login", login);
 // get specific users by email
 // get all APIs from db
 
-app.get("/profile", profile);
+app.get("/profile", userAuth, profile);
 
 app.get("/user", getUser);
 
