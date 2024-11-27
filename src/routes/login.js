@@ -1,5 +1,8 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+// in login api, after email and password validation, create JWT token and send it back to user
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -21,8 +24,13 @@ const login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials." });
     }
+    const secretKey = "my secret key";
+    const payload = { id: user._id, email: user.email };
+    const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 });
+    console.log(token);
+    res.cookie("token", token);
 
-    res.status(200).json({ message: "Login successful!" });
+    res.status(200).json({ message: "Login successful!", token });
   } catch (error) {
     res.status(500).json({ message: "Internal server error." });
   }
