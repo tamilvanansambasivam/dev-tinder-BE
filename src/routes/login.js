@@ -20,18 +20,18 @@ const login = async (req, res) => {
     }
 
     // Compare the provided password with the hashed password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await user.validatePassword(password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials." });
     }
-    const secretKey = "my secret key";
-    const payload = { id: user._id, email: user.email };
-    const token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 });
-    console.log(token);
+
+    const token = await user.getJWT();
+
     res.cookie("token", token);
 
     res.status(200).json({ message: "Login successful!", token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Internal server error." });
   }
 };
