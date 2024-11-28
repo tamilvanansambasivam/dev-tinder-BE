@@ -5,13 +5,13 @@ const signup = require("./routes/signup");
 const login = require("./routes/login");
 const profile = require("./routes/profile");
 const test = require("./routes/test");
-const app = express();
 const connectDB = require("./config/database");
 const getAllUsers = require("./routes/getAllUsers");
 const getUser = require("./routes/getUser");
 const { userAuth } = require("./middleware/auth");
 const PORT = 3000;
 
+const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.get("/test", test);
@@ -19,8 +19,6 @@ app.get("/test", test);
 app.post("/sign-up", signup);
 
 app.get("/login", login);
-// get specific users by email
-// get all APIs from db
 
 app.get("/profile", userAuth, profile);
 
@@ -37,7 +35,7 @@ app.patch("/user", async (req, res) => {
   )
     .then((user) => {
       console.log(user);
-      res.send(user); // Send the updated user.
+      res.send(user);
     })
     .catch((error) => {
       console.log(error);
