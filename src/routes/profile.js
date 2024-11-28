@@ -1,7 +1,3 @@
-const User = require("../models/user");
-
-const jwt = require("jsonwebtoken");
-
 const profile = async (req, res) => {
   try {
     const user = req.user;

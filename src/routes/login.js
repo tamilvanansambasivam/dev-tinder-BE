@@ -1,6 +1,4 @@
 const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 // in login api, after email and password validation, create JWT token and send it back to user
 

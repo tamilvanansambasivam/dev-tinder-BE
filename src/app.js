@@ -1,10 +1,6 @@
 const express = require("express");
 var cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-
 const User = require("./models/user");
-const validator = require("validator");
-const bcrypt = require("bcrypt");
 const signup = require("./routes/signup");
 const login = require("./routes/login");
 const profile = require("./routes/profile");
