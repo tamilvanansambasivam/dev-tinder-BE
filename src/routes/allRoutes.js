@@ -7,6 +7,7 @@ const profile = require("./profile");
 const getUser = require("./getUser");
 const getAllUsers = require("./getAllUsers");
 const User = require("../models/user");
+const logout = require("./logout");
 
 const router = express.Router();
 
@@ -16,6 +17,8 @@ router.get("/", (req, res) => {
 router.get("/test", test);
 
 router.get("/login", login);
+
+router.get("/logout", logout);
 
 router.get("/profile", userAuth, profile);
 
